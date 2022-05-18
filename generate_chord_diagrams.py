@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 # vim coding:utf-8
+import os
+import sys
+from argparse import ArgumentParser
 from copy import deepcopy
 from xml.etree import ElementTree
 
 import yaml
 
 
-BASE_SVG_FILENAME = 'chord_base.svg'
-CHORDS_YAML_FILENAME = 'chords.yaml'
+DEFAULT_TEMPLATE = 'chord_base.svg'
 
 NOTES = [
         'A',
@@ -93,16 +95,27 @@ def generate_chord(tree, chord):
     return result
 
 
-def main(tree, chords):
+def main(tree, chords, output_dir):
+    os.makedirs(output_dir, exist_ok=True)
     for chord in chords:
         diag = generate_chord(tree, chord)
         name = chord['name'].replace('/', '_').replace(' ', '_')
-        filename = f"{name}.svg"
+        filename = os.path.join(output_dir, f"{name}.svg")
         diag.write(filename)
+        print(f"Generated {filename}")
 
 
 if __name__ == '__main__':
-    tree = ElementTree.parse(BASE_SVG_FILENAME)
-    with open(CHORDS_YAML_FILENAME, 'r') as fp:
-        chords = yaml.safe_load(fp)
-    main(tree, chords)
+    parser = ArgumentParser()
+    parser.add_argument('-d', '--output-dir', default='build')
+    parser.add_argument('-t', '--template-file', default=DEFAULT_TEMPLATE)
+    parser.add_argument('-f', '--chords-file', default='-')
+    args = parser.parse_args()
+
+    tree = ElementTree.parse(args.template_file)
+    if args.chords_file == '-':
+        chords = yaml.safe_load(sys.stdin)
+    else:
+        with open(args.chords_file, 'r') as fp:
+            chords = yaml.safe_load(fp)
+    main(tree, chords, args.output_dir)
