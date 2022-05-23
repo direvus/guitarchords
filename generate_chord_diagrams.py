@@ -71,7 +71,10 @@ def generate_chord(tree, chord):
         if isinstance(value, (list, tuple)):
             finger, fret = value[:2]
             finger = str(finger).upper()
-            mark = find_element_by_id(result, f'finger{finger}')
+            if finger == 'T':
+                mark = find_element_by_id(result, f'thumb')
+            else:
+                mark = find_element_by_id(result, f'finger{finger}')
             parent = parent_map[mark]
             mark = deepcopy(mark)
             parent.append(mark)
