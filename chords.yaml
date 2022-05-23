@@ -53,6 +53,15 @@
     - [2, 3]
     - X
 
+- name: C/G
+  strings:
+    - O
+    - [1, 1]
+    - O
+    - [2, 2]
+    - [4, 3]
+    - [3, 3]
+
 - name: D
   strings:
     - [3, 2]
@@ -70,6 +79,15 @@
     - O
     - X
     - X
+
+- name: D/F♯
+  strings:
+    - [3, 2]
+    - [2, 3]
+    - [1, 2]
+    - O
+    - O
+    - [T, 2]
 
 - name: Dadd11/F♯
   strings:
