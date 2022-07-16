@@ -147,6 +147,9 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
                 </div>
                 <div class="six wide column">
                     <img src="chord?{{ chord_query_params(name, strings) }}" alt="{{ name }}">
+                    <p>
+                        <a class="ui button" href="download?{{ chord_query_params(name, strings) }}"><i class="download icon"></i> Download this diagram</a>
+                    </p>
                 </div>
             </div>
         </div>

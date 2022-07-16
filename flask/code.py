@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import re
 import subprocess
 from copy import deepcopy
 from tempfile import NamedTemporaryFile
@@ -123,8 +124,22 @@ def index():
 def chord():
     chord = validate_chord(request)
     chord = strings_to_short_form(chord)
-    print(chord)
     filename = generate_diagram(chord)
     result = send_file(filename, 'image/png')
+    os.remove(filename)
+    return result
+
+
+@app.route('/download')
+def download():
+    chord = validate_chord(request)
+    chord = strings_to_short_form(chord)
+    filename = generate_diagram(chord)
+    dl_name = re.sub(r'[\W]+', '', chord['name']) + '.png'
+    result = send_file(
+            filename,
+            'image/png',
+            as_attachment=True,
+            attachment_filename=dl_name)
     os.remove(filename)
     return result
