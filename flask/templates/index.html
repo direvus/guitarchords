@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+{% macro chord_query_params(name, strings) %}
+name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f2={{ strings.1.0 }}&s3={{ strings.2.1 }}&f3={{ strings.2.0 }}&s4={{ strings.3.1 }}&f4={{ strings.3.0 }}&s5={{ strings.4.1 }}&f5={{ strings.4.0 }}&s6={{ strings.5.1 }}&f6={{ strings.5.0 }}
+{% endmacro %}
+
+{% macro fret_input(string, fret) %}
+<select class="ui dropdown" name="s{{ string }}">
+    <option value="O" {% if fret == "O" %}selected{% endif %}>Open</option>
+    <option value="X" {% if fret == "X" %}selected{% endif %}>Muted</option>
+    <option value="1" {% if fret == 1 %}selected{% endif %}>1st fret</option>
+    <option value="2" {% if fret == 2 %}selected{% endif %}>2nd fret</option>
+    <option value="3" {% if fret == 3 %}selected{% endif %}>3rd fret</option>
+    <option value="4" {% if fret == 4 %}selected{% endif %}>4th fret</option>
+    <option value="5" {% if fret == 5 %}selected{% endif %}>5th fret</option>
+    <option value="6" {% if fret == 6 %}selected{% endif %}>6th fret</option>
+    <option value="7" {% if fret == 7 %}selected{% endif %}>7th fret</option>
+    <option value="8" {% if fret == 8 %}selected{% endif %}>8th fret</option>
+    <option value="9" {% if fret == 9 %}selected{% endif %}>9th fret</option>
+    <option value="10" {% if fret == 10 %}selected{% endif %}>10th fret</option>
+    <option value="11" {% if fret == 11 %}selected{% endif %}>11th fret</option>
+</select>
+{% endmacro %}
+
+{% macro finger_input(string, finger) %}
+<select class="ui dropdown" name="f{{ string }}">
+    <option value="" {% if not finger %}selected{% endif %}>None</option>
+    <option value="1" {% if finger == 1 %}selected{% endif %}>1st finger</option>
+    <option value="2" {% if finger == 2 %}selected{% endif %}>2nd finger</option>
+    <option value="3" {% if finger == 3 %}selected{% endif %}>3rd finger</option>
+    <option value="4" {% if finger == 4 %}selected{% endif %}>4th finger</option>
+    <option value="5" {% if finger == "T" %}selected{% endif %}>Thumb</option>
+</select>
+{% endmacro %}
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="Author" content="Brendan Jurd">
+        <title>Guitar chord diagram generator</title>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/button.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/container.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/dropdown.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/form.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/grid.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/header.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/input.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/segment.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/list.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/icon.min.css">
+
+        <style type="text/css">
+            .masthead.segment { min-height: 150px; padding: 1em 0em; }
+            .masthead h1.ui.header { font-size: 2em; margin-top: 1.5em; }
+        </style>
+    </head>
+    <body>
+        <div class="ui inverted masthead center aligned segment">
+            <div class="ui text container">
+                <h1 class="ui inverted header">Guitar chord diagram generator</h1>
+            </div>
+        </div>
+
+        <div class="ui center aligned segment">
+            <h2>Presets</h2>
+
+            <div class="ui grid">
+                {% for initial, chords in presets %}
+                <div class="two wide column">
+                    <h3>{{ initial }}</h3>
+                    {% for chord in chords %}
+                    <div>
+                        <a href="/?{{ chord_query_params(chord.name, chord.strings) }}">{{ chord.name }}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="ui center aligned segment">
+            <div class="ui grid">
+                <div class="ten wide column">
+                    <form class="ui form" method="get">
+                        <div class="inline field">
+                            <label>Chord name</label>
+                            <input class="ui input" name="name" value="{{ name }}" placeholder="Chord name">
+                        </div>
+
+                        <table class="ui basic collapsing definition table" style="margin: 1ex auto;">
+                            <thead>
+                                <tr>
+                                    <th>String</th>
+                                    <th>Standard E tuning</th>
+                                    <th>Fret</th>
+                                    <th>Finger</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1st (thinnest) string</td>
+                                    <td>High E</td>
+                                    <td>{{ fret_input(1, strings.0.1) }}</td>
+                                    <td>{{ finger_input(1, strings.0.0) }}</td>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2nd string</td>
+                                    <td>B</td>
+                                    <td>{{ fret_input(2, strings.1.1) }}</td>
+                                    <td>{{ finger_input(2, strings.1.0) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>3rd string</td>
+                                    <td>G</td>
+                                    <td>{{ fret_input(3, strings.2.1) }}</td>
+                                    <td>{{ finger_input(3, strings.2.0) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>4th string</td>
+                                    <td>D</td>
+                                    <td>{{ fret_input(4, strings.3.1) }}</td>
+                                    <td>{{ finger_input(4, strings.3.0) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>5th string</td>
+                                    <td>A</td>
+                                    <td>{{ fret_input(5, strings.4.1) }}</td>
+                                    <td>{{ finger_input(5, strings.4.0) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>6th (thickest) string</td>
+                                    <td>Low E</td>
+                                    <td>{{ fret_input(6, strings.5.1) }}</td>
+                                    <td>{{ finger_input(6, strings.5.0) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div>
+                            <button class="ui primary button" type="submit"><i class="file image icon"></i> Generate</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="six wide column">
+                    <img src="/chord?{{ chord_query_params(name, strings) }}" alt="{{ name }}">
+                </div>
+            </div>
+        </div>
+
+        <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/dropdown.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/form.min.js"></script>
+
+        <div class="ui inverted footer segment">
+            <div class="ui container">
+                <p>&copy; Brendan Jurd  &middot;  <a href="https://github.com/direvus/guitarchords">GitHub</a></p>
+            </div>
+        </div>
+    </body>
+</html>
