@@ -26,8 +26,8 @@
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="0.77058782"
-     inkscape:cx="-246.81408"
-     inkscape:cy="572.29038"
+     inkscape:cx="-457.69206"
+     inkscape:cy="468.47353"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -155,7 +155,7 @@
          inkscape:connector-curvature="0" />
     </g>
     <rect
-       y="153.11855"
+       y="130.11392"
        x="29.119081"
        height="2.9223552"
        width="172.09422"
@@ -167,9 +167,9 @@
        width="172.09422"
        height="2.9223552"
        x="29.119081"
-       y="274.23395" />
+       y="232.00159" />
     <rect
-       y="218.38446"
+       y="183.3625"
        x="30.417908"
        height="2.9223552"
        width="172.09422"
@@ -187,14 +187,14 @@
        style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="string6"
        width="7.4682407"
-       height="217.3636"
+       height="223.89349"
        x="37.94846"
-       y="64.7687"
+       y="64.762512"
        inkscape:label="#rect817" />
     <rect
-       y="64.7687"
+       y="64.777084"
        x="68.405884"
-       height="217.3636"
+       height="223.54277"
        width="5.5200038"
        id="string5"
        style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -203,14 +203,14 @@
        style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="string4"
        width="4.4797473"
-       height="217.3636"
+       height="223.54277"
        x="98.409332"
-       y="64.7687"
+       y="64.777084"
        inkscape:label="#rect821" />
     <rect
        y="64.47377"
        x="128.44731"
-       height="217.3636"
+       height="223.54277"
        width="3.3704493"
        id="string3"
        style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -219,14 +219,14 @@
        style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="string2"
        width="2.2729428"
-       height="217.3636"
+       height="223.54277"
        x="158.47937"
        y="64.47377"
        inkscape:label="#rect825" />
     <rect
-       y="64.7687"
+       y="64.777084"
        x="188.28738"
-       height="217.3636"
+       height="223.54277"
        width="1.6235305"
        id="string1"
        style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -345,13 +345,13 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.65579987px;line-height:1.25;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.36639884"
        x="11.58241"
-       y="118.93979"
+       y="105.54904"
        id="fret1"
        inkscape:label="#text906"><tspan
          sodipodi:role="line"
          id="tspan904"
          x="11.58241"
-         y="118.93979"
+         y="105.54904"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.65579987px;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#808080;stroke-width:0.36639884">I</tspan></text>
     <text
        id="title"
@@ -494,13 +494,13 @@
          sodipodi:role="line">e</tspan></text>
     <text
        id="fret2"
-       y="193.44731"
+       y="158.76871"
        x="11.58241"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.65579987px;line-height:1.25;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.36639884"
        xml:space="preserve"
        inkscape:label="#text973"><tspan
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.65579987px;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#808080;stroke-width:0.36639884"
-         y="193.44731"
+         y="158.76871"
          x="11.58241"
          id="tspan971"
          sodipodi:role="line">II</tspan></text>
@@ -508,13 +508,13 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.65579987px;line-height:1.25;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.36639884"
        x="11.58241"
-       y="254.56407"
+       y="210.61491"
        id="fret3"
        inkscape:label="#text977"><tspan
          sodipodi:role="line"
          id="tspan975"
          x="11.58241"
-         y="254.56407"
+         y="210.61491"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.65579987px;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#808080;stroke-width:0.36639884">III</tspan></text>
     <circle
        r="6.1847739"
@@ -558,5 +558,24 @@
        cy="47.018669"
        r="6.1847739"
        inkscape:label="#circle1731" />
+    <text
+       inkscape:label="#text977"
+       id="fret4"
+       y="254.22072"
+       x="11.58241"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.65579987px;line-height:1.25;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.36639884"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.65579987px;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#808080;stroke-width:0.36639884"
+         y="254.22072"
+         x="11.58241"
+         id="tspan896"
+         sodipodi:role="line">IV</tspan></text>
+    <rect
+       y="278.35419"
+       x="29.119081"
+       height="2.9223552"
+       width="172.09422"
+       id="rect900"
+       style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1.08295095;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
   </g>
 </svg>
