@@ -8,6 +8,15 @@
     - O
     - X
 
+- name: A7
+  strings:
+    - O
+    - [3, 2]
+    - O
+    - [2, 2]
+    - O
+    - X
+
 - name: A7sus4
   strings:
     - [4, 3]
@@ -49,6 +58,15 @@
     - O
     - [1, 1]
     - O
+    - [2, 2]
+    - [3, 3]
+    - X
+
+- name: C7
+  strings:
+    - O
+    - [1, 1]
+    - [4, 3]
     - [2, 2]
     - [3, 3]
     - X
@@ -125,6 +143,15 @@
     - [2, 2]
     - O
 
+- name: E7
+  strings:
+    - O
+    - O
+    - [1, 1]
+    - O
+    - [2, 2]
+    - O
+
 - name: Em
   strings:
     - O
@@ -161,6 +188,15 @@
     - X
     - X
 
+- name: Fmaj7sus2
+  strings:
+    - O
+    - [1, 1]
+    - O
+    - [3, 3]
+    - X
+    - X
+
 - name: F6/9
   strings:
     - [4, 3]
@@ -179,6 +215,15 @@
     - [1, 2]
     - [2, 3]
 
+- name: G weak
+  strings:
+    - [4, 3]
+    - O
+    - O
+    - O
+    - X
+    - [3, 3]
+
 - name: G5
   strings:
     - [4, 3]
@@ -187,4 +232,13 @@
     - O
     - X
     - [2, 3]
+
+- name: G7
+  strings:
+    - [1, 1]
+    - O
+    - O
+    - O
+    - [2, 2]
+    - [3, 3]
 
