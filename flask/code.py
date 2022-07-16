@@ -96,7 +96,7 @@ def generate_diagram(chord):
 
 @app.route('/')
 def index():
-    with open('chords.yaml', 'r') as fp:
+    with open('chords.yaml', 'r', encoding='utf-8') as fp:
         presets = yaml.safe_load(fp)
     initials = []
     groups = {}

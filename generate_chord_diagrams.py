@@ -119,6 +119,6 @@ if __name__ == '__main__':
     if args.chords_file == '-':
         chords = yaml.safe_load(sys.stdin)
     else:
-        with open(args.chords_file, 'r') as fp:
+        with open(args.chords_file, 'r', encoding='utf-8') as fp:
             chords = yaml.safe_load(fp)
     main(tree, chords, args.output_dir)
