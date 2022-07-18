@@ -3,16 +3,21 @@ Generator for guitar chord diagrams
 
 ![Example of diagram for Cadd9 chord](/doc/Cadd9.png)
 
-This is a program that generates a suite of guitar chord diagrams.
+Web interface: [https://swords.id.au/guitarchords/](https://swords.id.au/guitarchords/)
 
-It uses an SVG template and a list of chord definitions in YAML, and produces
-one diagram for each of the chords defined.
+This is a Python module, CLI program and website for generating guitar chord
+diagrams.
+
+It uses an SVG template, and produces a PNG diagram for a given chord
+fingering definition.
 
 The repository comes with a default template and chord definition list, but you
 are free to modify the template and/or the chords, or create your own from
 scratch.
 
-## Usage
+## Command-line program
+
+### Usage
 
 ```
 generate_chord_diagrams.py [-t TEMPLATE_FILE] [-f CHORDS_FILE] [-d OUTPUT_DIR]
@@ -24,18 +29,18 @@ chord definition document on standard input.  It will write out the generated
 chord diagrams as SVG to a directory named `build/`.  All of these defaults can
 be overridden with command-line arguments.
 
-## Dependencies
+### Dependencies
 
 - Python 3
 - [pyyaml](https://pyyaml.org) pip package
 - Inkscape or similar, if you want to export the diagrams to raster format
 
-## Installation
+### Installation
 
 Copy `generate_chord_diagrams.py` (and optionally `chord_base.svg` and
 `chords.yaml`) to your computer.
 
-## Chord definition format
+### Chord definition format
 
 Chords are defined as objects with two required properties:
 
@@ -75,6 +80,18 @@ This has the meaning:
 - The fourth string (D) is fretted with the first finger on the second fret.
 - The fifth string (A) is fretted with the second finger on the third fret.
 - The sixth string (low E) is muted.
+
+## Website
+
+![gcdg](https://user-images.githubusercontent.com/312229/179431524-85adf12d-b71a-4ffa-b110-a2903c894b9d.png)
+
+[https://swords.id.au/guitarchords/](https://swords.id.au/guitarchords/)
+
+This is a Python [Flask](https://flask.palletsprojects.com/en/2.1.x/) web
+application, with [Semantic UI](https://semantic-ui.com/) for styling.
+
+The site features presets for a range of common chords, as well as the
+ability to create a custom chord fingering and generate a diagram for it.
 
 ## Credits
 
