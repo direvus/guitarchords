@@ -4,7 +4,7 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
 {% endmacro %}
 
 {% macro fret_input(string, fret) %}
-<select class="ui dropdown" name="s{{ string }}">
+<select class="ui dropdown" name="s{{ string }}" onchange="show_played_note({{ string }});">
     <option value="O" {% if fret == "O" %}selected{% endif %}>Open</option>
     <option value="X" {% if fret == "X" %}selected{% endif %}>Muted</option>
     <option value="1" {% if fret == 1 %}selected{% endif %}>1st fret</option>
@@ -89,6 +89,7 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
                                     <th>Standard E tuning</th>
                                     <th>Fret</th>
                                     <th>Finger</th>
+                                    <th>Played note</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -98,37 +99,42 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
                                     <td>{{ fret_input(1, strings.0.1) }}</td>
                                     <td>{{ finger_input(1, strings.0.0) }}</td>
                                     </td>
-                                    <td></td>
+                                    <td id="played1"></td>
                                 </tr>
                                 <tr>
                                     <td>2nd string</td>
                                     <td>B</td>
                                     <td>{{ fret_input(2, strings.1.1) }}</td>
                                     <td>{{ finger_input(2, strings.1.0) }}</td>
+                                    <td id="played2"></td>
                                 </tr>
                                 <tr>
                                     <td>3rd string</td>
                                     <td>G</td>
                                     <td>{{ fret_input(3, strings.2.1) }}</td>
                                     <td>{{ finger_input(3, strings.2.0) }}</td>
+                                    <td id="played3"></td>
                                 </tr>
                                 <tr>
                                     <td>4th string</td>
                                     <td>D</td>
                                     <td>{{ fret_input(4, strings.3.1) }}</td>
                                     <td>{{ finger_input(4, strings.3.0) }}</td>
+                                    <td id="played4"></td>
                                 </tr>
                                 <tr>
                                     <td>5th string</td>
                                     <td>A</td>
                                     <td>{{ fret_input(5, strings.4.1) }}</td>
                                     <td>{{ finger_input(5, strings.4.0) }}</td>
+                                    <td id="played5"></td>
                                 </tr>
                                 <tr>
                                     <td>6th (thickest) string</td>
                                     <td>Low E</td>
                                     <td>{{ fret_input(6, strings.5.1) }}</td>
                                     <td>{{ finger_input(6, strings.5.0) }}</td>
+                                    <td id="played6"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -147,18 +153,20 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
             </div>
         </div>
 
-        <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/dropdown.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/form.min.js"></script>
-
         <div class="ui inverted footer segment">
             <div class="ui container">
                 <p>&copy; Brendan Jurd  &middot;  <a href="https://github.com/direvus/guitarchords">GitHub</a></p>
             </div>
         </div>
+
+        <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+        <script src="static/site.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/dropdown.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/components/form.min.js"></script>
+
     </body>
 </html>
