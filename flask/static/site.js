@@ -23,24 +23,39 @@ function mod_note(note, semitones) {
     return NOTES[i];
 }
 
-function show_played_note(string) {
-    v = $("select[name='s" + string.toString() + "'] option:checked").val();
-    if (v == "X") {
+function show_played_note(string, fret) {
+    if (fret == "X") {
         note = "-";
     } else {
         note = TUNING[string - 1];
-        if (v != "O") {
-            note = mod_note(note, parseInt(v));
+        if (fret != "O") {
+            note = mod_note(note, parseInt(fret));
         }
     }
-    console.log(note);
     $("#played" + string.toString()).text(note);
 }
 
-function show_all_played_notes() {
-    for (var i = 1; i <= 6; i++) {
-        show_played_note(i);
+function update_finger_disabled(string, fret) {
+    vis = (fret == "X" || fret == "O");
+    el = $("select[name='f" + string.toString() + "']");
+    el.prop("disabled", vis);
+    if (vis) {
+        el.addClass("disabled");
+    } else {
+        el.removeClass("disabled");
     }
 }
 
-$(document).ready(show_all_played_notes);
+function update_string(string) {
+    v = $("select[name='s" + string.toString() + "'] option:checked").val();
+    show_played_note(string, v);
+    update_finger_disabled(string, v);
+}
+
+function update_all_strings() {
+    for (var i = 1; i <= 6; i++) {
+        update_string(i);
+    }
+}
+
+$(document).ready(update_all_strings);

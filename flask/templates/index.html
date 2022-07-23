@@ -4,7 +4,7 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
 {% endmacro %}
 
 {% macro fret_input(string, fret) %}
-<select class="ui dropdown" name="s{{ string }}" onchange="show_played_note({{ string }});">
+<select class="ui dropdown" name="s{{ string }}" onchange="update_string({{ string }});">
     <option value="O" {% if fret == "O" %}selected{% endif %}>Open</option>
     <option value="X" {% if fret == "X" %}selected{% endif %}>Muted</option>
     <option value="1" {% if fret == 1 %}selected{% endif %}>1st fret</option>
