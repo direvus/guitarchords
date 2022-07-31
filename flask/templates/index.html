@@ -4,7 +4,7 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
 {% endmacro %}
 
 {% macro fret_input(string, fret) %}
-<select class="ui dropdown" name="s{{ string }}" onchange="update_string({{ string }});">
+<select class="ui dropdown" name="s{{ string }}" onchange="update_one_string({{ string }});">
     <option value="O" {% if fret == "O" %}selected{% endif %}>Open</option>
     <option value="X" {% if fret == "X" %}selected{% endif %}>Muted</option>
     <option value="1" {% if fret == 1 %}selected{% endif %}>1st fret</option>
@@ -47,6 +47,7 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
         <style type="text/css">
             .masthead.segment { min-height: 150px; padding: 1em 0em; }
             .masthead h1.ui.header { font-size: 2em; margin-top: 1.5em; }
+            td.degree { font-family: "Linux Libertine", "Times New Roman", serif; }
         </style>
     </head>
     <body>
@@ -90,6 +91,7 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
                                     <th>Fret</th>
                                     <th>Finger</th>
                                     <th>Played note</th>
+                                    <th>Scale degree</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,6 +102,7 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
                                     <td>{{ finger_input(1, strings.0.0) }}</td>
                                     </td>
                                     <td id="played1"></td>
+                                    <td id="degree1" class="degree"></td>
                                 </tr>
                                 <tr>
                                     <td>2nd string</td>
@@ -107,6 +110,7 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
                                     <td>{{ fret_input(2, strings.1.1) }}</td>
                                     <td>{{ finger_input(2, strings.1.0) }}</td>
                                     <td id="played2"></td>
+                                    <td id="degree2" class="degree"></td>
                                 </tr>
                                 <tr>
                                     <td>3rd string</td>
@@ -114,6 +118,7 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
                                     <td>{{ fret_input(3, strings.2.1) }}</td>
                                     <td>{{ finger_input(3, strings.2.0) }}</td>
                                     <td id="played3"></td>
+                                    <td id="degree3" class="degree"></td>
                                 </tr>
                                 <tr>
                                     <td>4th string</td>
@@ -121,6 +126,7 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
                                     <td>{{ fret_input(4, strings.3.1) }}</td>
                                     <td>{{ finger_input(4, strings.3.0) }}</td>
                                     <td id="played4"></td>
+                                    <td id="degree4" class="degree"></td>
                                 </tr>
                                 <tr>
                                     <td>5th string</td>
@@ -128,6 +134,7 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
                                     <td>{{ fret_input(5, strings.4.1) }}</td>
                                     <td>{{ finger_input(5, strings.4.0) }}</td>
                                     <td id="played5"></td>
+                                    <td id="degree5" class="degree"></td>
                                 </tr>
                                 <tr>
                                     <td>6th (thickest) string</td>
@@ -135,6 +142,7 @@ name={{ name }}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f
                                     <td>{{ fret_input(6, strings.5.1) }}</td>
                                     <td>{{ finger_input(6, strings.5.0) }}</td>
                                     <td id="played6"></td>
+                                    <td id="degree6" class="degree"></td>
                                 </tr>
                             </tbody>
                         </table>
