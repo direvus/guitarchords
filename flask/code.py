@@ -73,8 +73,15 @@ def validate_chord(request):
             }
 
 
-def generate_diagram(chord):
-    tree = ElementTree.parse('chord_base.svg')
+def validate_left_handed(request):
+    return (request.args.get('lh', '').strip() == '1')
+
+
+def generate_diagram(chord, left=False):
+    template_file = 'chord_base.svg'
+    if left:
+        template_file = 'chord_base_lh.svg'
+    tree = ElementTree.parse(template_file)
     diag = generate_chord(tree, chord)
     svgfile = NamedTemporaryFile(delete=False)
     diag.write(svgfile)
@@ -112,9 +119,11 @@ def index():
 
     presets = [(x, groups[x]) for x in initials]
     chord = validate_chord(request)
+    left = validate_left_handed(request)
     return render_template(
             'index.html',
             name=chord['name'],
+            left=left,
             strings=chord['strings'],
             presets=presets,
             )
@@ -122,9 +131,10 @@ def index():
 
 @app.route('/chord')
 def chord():
+    left = validate_left_handed(request)
     chord = validate_chord(request)
     chord = strings_to_short_form(chord)
-    filename = generate_diagram(chord)
+    filename = generate_diagram(chord, left)
     result = send_file(filename, 'image/png')
     os.remove(filename)
     return result
@@ -132,14 +142,18 @@ def chord():
 
 @app.route('/download')
 def download():
+    left = validate_left_handed(request)
     chord = validate_chord(request)
     chord = strings_to_short_form(chord)
-    filename = generate_diagram(chord)
-    dl_name = re.sub(r'[\W]+', '', chord['name']) + '.png'
+    filename = generate_diagram(chord, left)
+    basename = re.sub(r'[\W]+', '', chord['name'])
+    if left:
+        basename += '_lh'
+    dlname = basename + '.png'
     result = send_file(
             filename,
             'image/png',
             as_attachment=True,
-            attachment_filename=dl_name)
+            attachment_filename=dlname)
     os.remove(filename)
     return result
