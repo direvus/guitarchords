@@ -48,6 +48,7 @@ name={{ name }}{% if left %}&lh=1{% endif %}&s1={{ strings.0.1 }}&f1={{ strings.
             .masthead.segment { min-height: 150px; padding: 1em 0em; }
             .masthead h1.ui.header { font-size: 2em; margin-top: 1.5em; }
             td.degree { font-family: "Linux Libertine", "Times New Roman", serif; }
+            .hidden { visibility: hidden; }
         </style>
     </head>
     <body>
@@ -80,7 +81,10 @@ name={{ name }}{% if left %}&lh=1{% endif %}&s1={{ strings.0.1 }}&f1={{ strings.
                     <form class="ui form" method="get">
                         <div class="inline field">
                             <label>Chord name</label>
-                            <input class="ui input" name="name" value="{{ name }}" placeholder="Chord name">
+                            <input class="ui input" name="name" value="{{ name }}" placeholder="Chord name" onkeyup="update_all_strings();">
+                            <div id="scale-warning" class="ui icon orange hidden button" data-tooltip="Unable to figure out the scale of this chord from its name.  Try putting the root note of the chord at the start of the name, like in &ldquo;Dm&rdquo;.">
+                                <i class="exclamation triangle icon"></i>
+                            </div>
                         </div>
 
                         <div class="inline field">

@@ -43,7 +43,7 @@ const SCALES = {
 
 function get_string_note(string, fret) {
     if (fret == "X") {
-        return "-";
+        return null;
     }
     var note = TUNING[string - 1];
     if (fret != "O") {
@@ -79,11 +79,18 @@ function get_scale_degree(root, mode, note) {
 }
 
 function show_played_note(string, note) {
-    $("#played" + string.toString()).text(note);
+    var text = note;
+    if (note === null) {
+        text = "-";
+    }
+    $("#played" + string.toString()).text(text);
 }
 
 function show_scale_degree(root, mode, string, note) {
-    var degree = get_scale_degree(root, mode, note);
+    var degree = "";
+    if (root !== null && mode !== null && note !== null) {
+        degree = get_scale_degree(root, mode, note);
+    }
     $("#degree" + string.toString()).text(degree);
 }
 
@@ -102,9 +109,7 @@ function update_string(root, mode, string) {
     fret = $("select[name='s" + string.toString() + "'] option:checked").val();
     note = get_string_note(string, fret);
     show_played_note(string, note);
-    if (root !== null && mode !== null) {
-        show_scale_degree(root, mode, string, note);
-    }
+    show_scale_degree(root, mode, string, note);
     update_finger_disabled(string, fret);
 }
 
@@ -136,11 +141,15 @@ function get_scale() {
 
 function update_one_string(string) {
     scale = get_scale();
-    update_string(scale[0], scale[1], i);
+    update_string(scale[0], scale[1], string);
 }
 
 function update_all_strings() {
+    var name = $("input[name='name']").val().trim();
     var scale = get_scale();
+    if (name != "" && scale[0] === null) {
+        $("#scale-warning").removeClass("hidden");
+    }
     for (var i = 1; i <= 6; i++) {
         update_string(scale[0], scale[1], i);
     }
