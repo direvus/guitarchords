@@ -102,7 +102,9 @@ function update_string(root, mode, string) {
     fret = $("select[name='s" + string.toString() + "'] option:checked").val();
     note = get_string_note(string, fret);
     show_played_note(string, note);
-    show_scale_degree(root, mode, string, note);
+    if (root !== null && mode !== null) {
+        show_scale_degree(root, mode, string, note);
+    }
     update_finger_disabled(string, fret);
 }
 
@@ -111,7 +113,7 @@ function get_scale() {
     var name = name.replaceAll(/\s+/g, '');
     var matches = name.match(/^([A-Ga-g])([#♯b♭])?(.*)/);
     if (matches == null) {
-        return null;
+        return [null, null];
     }
     if (matches[2] == "#") {
         matches[2] = "♯";
@@ -141,7 +143,6 @@ function update_all_strings() {
     var scale = get_scale();
     for (var i = 1; i <= 6; i++) {
         update_string(scale[0], scale[1], i);
-        console.log(scale, i);
     }
 }
 
