@@ -94,14 +94,22 @@ function show_scale_degree(root, mode, string, note) {
     $("#degree" + string.toString()).text(degree);
 }
 
-function update_finger_disabled(string, fret) {
-    var vis = (fret == "X" || fret == "O");
+function update_finger_input(string, fret) {
+    var disable = (fret == "X" || fret == "O");
     var el = $("select[name='f" + string.toString() + "']");
-    el.prop("disabled", vis);
-    if (vis) {
+    el.prop("disabled", disable);
+    if (disable) {
         el.addClass("disabled");
     } else {
         el.removeClass("disabled");
+        var val = el[0].value;
+        var valid = (val != "");
+        if (valid) {
+            el.removeClass("error");
+        } else {
+            el.addClass("error");
+        }
+        update_submit_button(valid);
     }
 }
 
@@ -110,7 +118,17 @@ function update_string(root, mode, string) {
     note = get_string_note(string, fret);
     show_played_note(string, note);
     show_scale_degree(root, mode, string, note);
-    update_finger_disabled(string, fret);
+    update_finger_input(string, fret);
+}
+
+function update_submit_button(valid) {
+    var el = $("button[type='submit']");
+    el.prop("disabled", !valid);
+    if (valid) {
+        el.removeClass("disabled");
+    } else {
+        el.addClass("disabled");
+    }
 }
 
 function get_scale() {
