@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # vim coding:utf-8
 import os
+import re
 import sys
 from argparse import ArgumentParser
 from copy import deepcopy
@@ -10,7 +11,8 @@ import yaml
 
 
 DEFAULT_TEMPLATE = 'chord_base.svg'
-
+WHITESPACE_RE = re.compile(r'\s+')
+ROOT_RE = re.compile(r'^([A-Ga-g])([#♯b♭])?(.*)')
 NOTES = [
         'A',
         'A♯',
@@ -63,14 +65,56 @@ def get_note_name(index, flats=False):
     return NOTES[index]
 
 
+def get_scale(name):
+    """Get the scale from a chord name.
+
+    Returns a tuple containing the root note name, followed by the mode
+    ('major' or 'minor') in lowercase.
+
+    For sharp or flat root note names, a '#' or 'b' in the chord name will be
+    translated into the actual sharp or flat symbol respectively.
+
+    For example:
+        get_scale('Am7') -> ('A', 'minor')
+        get_scale('Bb') -> ('B♭', 'major')
+
+    Return (None, None) if the chord name fails to parse.
+    """
+    name = WHITESPACE_RE.sub('', str(name))
+    if not name:
+        return (None, None)
+    match = ROOT_RE.match(name)
+    if match is None:
+        return (None, None)
+    root = match.group(1).upper()
+    mode = 'major'
+
+    if match.group(2):
+        acc = match.group(2)
+        if acc == '#':
+            acc = '♯'
+        elif acc == 'b':
+            acc = '♭'
+        root += acc
+
+    if match.group(3):
+        rem = match.group(3).lower()
+        if rem[0] == 'm' and (len(rem) == 1 or rem[1] not in {'a', 'j'}):
+            mode = 'minor'
+
+    return [root, mode]
+
+
 def generate_chord(tree, chord):
     result = deepcopy(tree)
     parent_map = {c: p for p in result.iter() for c in p}
     title = find_element_by_id(result, 'title')
-    name = chord.get('name', '')
+    name = chord.get('name', '').strip()
     title[0].text = name
+
+    root, mode = get_scale(name)
     flats = False
-    if name in FLATS.values():
+    if root == 'F' or root in FLATS.values():
         flats = True
 
     for i, value in enumerate(chord.get('strings', [])):

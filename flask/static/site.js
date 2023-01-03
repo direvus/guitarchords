@@ -121,6 +121,8 @@ function update_string(root, mode, string) {
         if (root_index < 0) {
             root_index += 12;
         }
+    } else if (root == "F") {
+        flats = true;
     }
     var index = get_string_note(string, fret);
     var name = get_note_name(index, flats);
