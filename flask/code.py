@@ -90,11 +90,11 @@ def generate_diagram(chord, left=False):
     pngfile.close()
     subprocess.run([
             'inkscape',
-            '-z',
             '-C',
             '-w',
             '209',
-            '-e',
+            '--export-type=png',
+            '-o',
             pngfile.name,
             svgfile.name,
             ])

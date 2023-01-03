@@ -33,6 +33,13 @@ STRING_NOTES = [
         'A',
         'E',
         ]
+FLATS = {
+        1:  'B♭',
+        4:  'D♭',
+        6:  'E♭',
+        9:  'G♭',
+        11: 'A♭',
+        }
 
 
 def find_element_by_id(root, elem_id):
@@ -49,11 +56,22 @@ def remove_element_by_id(root, elem_id, parent_map):
     remove_element(elem, parent_map)
 
 
+def get_note_name(index, flats=False):
+    index = index % 12
+    if flats and index in FLATS:
+        return FLATS[index]
+    return NOTES[index]
+
+
 def generate_chord(tree, chord):
     result = deepcopy(tree)
     parent_map = {c: p for p in result.iter() for c in p}
     title = find_element_by_id(result, 'title')
-    title[0].text = chord.get('name', '')
+    name = chord.get('name', '')
+    title[0].text = name
+    flats = False
+    if name in FLATS.values():
+        flats = True
 
     for i, value in enumerate(chord.get('strings', [])):
         num = i + 1
@@ -68,32 +86,34 @@ def generate_chord(tree, chord):
         if value not in ('O', '0'):
             remove_element_by_id(result, f'open{num}', parent_map)
 
-        if isinstance(value, (list, tuple)):
-            finger, fret = value[:2]
-            finger = str(finger).upper()
-            if finger == 'T':
-                mark = find_element_by_id(result, f'thumb')
-            else:
-                mark = find_element_by_id(result, f'finger{finger}')
-            parent = parent_map[mark]
-            mark = deepcopy(mark)
-            parent.append(mark)
-            circle = mark[0]
-            cx = float(circle.attrib['cx'])
-            cy = float(circle.attrib['cy'])
+        if not isinstance(value, (list, tuple)):
+            continue
 
-            s = find_element_by_id(result, f'string{num}')
-            x = float(s.attrib['x']) + float(s.attrib['width']) / 2
+        finger, fret = value[:2]
+        finger = str(finger).upper()
+        if finger == 'T':
+            mark = find_element_by_id(result, 'thumb')
+        else:
+            mark = find_element_by_id(result, f'finger{finger}')
+        parent = parent_map[mark]
+        mark = deepcopy(mark)
+        parent.append(mark)
+        circle = mark[0]
+        cx = float(circle.attrib['cx'])
+        cy = float(circle.attrib['cy'])
 
-            fretlabel = find_element_by_id(result, f'fret{fret}')
-            y = float(fretlabel.attrib['y'])
-            mark.attrib['transform'] = f'translate({x - cx}, {y - cy})'
+        s = find_element_by_id(result, f'string{num}')
+        x = float(s.attrib['x']) + float(s.attrib['width']) / 2
 
-            string_note = STRING_NOTES[i]
-            note_index = (NOTES.index(string_note) + fret) % 12
-            note = NOTES[note_index]
-            notelabel = find_element_by_id(result, f'note{num}')
-            notelabel[0].text = note
+        fretlabel = find_element_by_id(result, f'fret{fret}')
+        y = float(fretlabel.attrib['y'])
+        mark.attrib['transform'] = f'translate({x - cx}, {y - cy})'
+
+        string_note = STRING_NOTES[i]
+        note_index = NOTES.index(string_note) + fret
+        note = get_note_name(note_index, flats)
+        notelabel = find_element_by_id(result, f'note{num}')
+        notelabel[0].text = note
 
     return result
 
