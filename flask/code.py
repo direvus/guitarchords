@@ -77,7 +77,17 @@ def validate_left_handed(request):
     return (request.args.get('lh', '').strip() == '1')
 
 
-def generate_diagram(chord, left=False):
+def get_inkscape_version(command='inkscape'):
+    """Return the version of Inkscape, as a tuple of 3 integers."""
+    proc = subprocess.run([command, '-V'], capture_output=True, check=True)
+    out = proc.stdout.decode('utf-8')
+    match = re.match(r'^Inkscape (\d+)\.(\d+)\.(\d+)', out)
+    if not match:
+        raise Exception("Failed to parse output from Inkscape version string.")
+    return (int(match.group(1)), int(match.group(2)), int(match.group(3)))
+
+
+def generate_diagram(chord, left=False, width=209):
     template_file = 'chord_base.svg'
     if left:
         template_file = 'chord_base_lh.svg'
@@ -86,18 +96,17 @@ def generate_diagram(chord, left=False):
     svgfile = NamedTemporaryFile(delete=False)
     diag.write(svgfile)
     svgfile.close()
-    pngfile = NamedTemporaryFile(delete=False)
+    pngfile = NamedTemporaryFile(suffix='.png', delete=False)
     pngfile.close()
-    subprocess.run([
-            'inkscape',
-            '-C',
-            '-w',
-            '209',
-            '--export-type=png',
-            '-o',
-            pngfile.name,
-            svgfile.name,
-            ])
+
+    ver = get_inkscape_version()
+    args = ['inkscape', '-C', '-w', str(width)]
+    if ver[0] < 1:
+        args.extend(['-z', '-e', pngfile.name])
+    else:
+        args.extend(['--export-type=png', '-o', pngfile.name])
+    args.append(svgfile.name)
+    subprocess.run(args, check=True)
     os.remove(svgfile.name)
     return pngfile.name
 
