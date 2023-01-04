@@ -93,7 +93,7 @@ def generate_diagram(chord, left=False, width=209):
         template_file = 'chord_base_lh.svg'
     tree = ElementTree.parse(template_file)
     diag = generate_chord(tree, chord)
-    svgfile = NamedTemporaryFile(delete=False)
+    svgfile = NamedTemporaryFile(suffix='.svg', delete=False)
     diag.write(svgfile)
     svgfile.close()
     pngfile = NamedTemporaryFile(suffix='.png', delete=False)
