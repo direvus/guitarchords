@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.77058782"
-     inkscape:cx="-457.69206"
-     inkscape:cy="572.29038"
+     inkscape:zoom="0.38529391"
+     inkscape:cx="-43.553844"
+     inkscape:cy="359.24284"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -233,7 +233,7 @@
        inkscape:label="#rect827" />
     <g
        id="finger2"
-       transform="translate(-45.968819,-44.499298)"
+       transform="translate(-168.03066,-59.580917)"
        inkscape:label="#g848">
       <circle
          r="16.652599"
@@ -255,7 +255,7 @@
     </g>
     <g
        id="finger1"
-       transform="translate(-45.968819,-80.90331)"
+       transform="translate(-208.71795,-59.580917)"
        inkscape:label="#g856">
       <circle
          style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -276,7 +276,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.80737877px;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;stroke-width:0.79518443">1</tspan></text>
     </g>
     <g
-       transform="translate(-45.968819,28.308726)"
+       transform="translate(-86.656093,-59.580917)"
        id="finger4"
        inkscape:label="#g886">
       <circle
@@ -299,7 +299,7 @@
     </g>
     <g
        id="finger3"
-       transform="translate(-45.968819,-8.0952862)"
+       transform="translate(-127.34338,-59.580917)"
        inkscape:label="#g894">
       <circle
          r="16.652599"
@@ -321,7 +321,7 @@
     </g>
     <g
        id="thumb"
-       transform="translate(-45.968819,64.712725)"
+       transform="translate(-45.968811,-59.580917)"
        inkscape:label="#g902">
       <circle
          r="16.652599"
@@ -413,12 +413,12 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.75516033px;line-height:1.25;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.393879"
        x="-221.29141"
-       y="167.28235"
+       y="86.251137"
        id="text943"><tspan
          sodipodi:role="line"
          id="tspan941"
          x="-221.29141"
-         y="167.28235"
+         y="86.251137"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.75516033px;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#1a1a1a;stroke-width:0.393879">Fingers</tspan></text>
     <text
        id="note6"
@@ -587,5 +587,141 @@
            height="66.183243"
            x="42.824451"
            y="238.77875" /></flowRegion><flowPara
-         id="flowPara913"></flowPara></flowRoot>  </g>
+         id="flowPara913" /></flowRoot>    <text
+       id="text901"
+       y="158.37425"
+       x="-220.05499"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.75516033px;line-height:1.25;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.393879"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.75516033px;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#1a1a1a;stroke-width:0.393879"
+         y="158.37425"
+         x="-220.05499"
+         id="tspan899"
+         sodipodi:role="line">Barres</tspan></text>
+    <g
+       id="barre6"
+       inkscape:label="#g962"
+       transform="translate(-3.7639493,-123.50356)">
+      <rect
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.60000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect911-9"
+         width="178.20564"
+         height="33.048401"
+         x="-256.40079"
+         y="294.00378"
+         rx="16.5242"
+         ry="16.5242" />
+      <text
+         id="text907"
+         y="320.16495"
+         x="-167.36009"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.80737877px;line-height:1.25;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.79518443"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.80737877px;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;stroke-width:0.79518443"
+           y="320.16495"
+           x="-167.36009"
+           id="tspan905"
+           sodipodi:role="line">1</tspan></text>
+    </g>
+    <g
+       id="barre2"
+       inkscape:label="#g982"
+       transform="translate(-3.7639493,-123.50356)">
+      <rect
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.60000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect930"
+         width="61.327"
+         height="33.04834"
+         x="-139.37752"
+         y="471.72385"
+         rx="16.52417"
+         ry="16.52417" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.80737877px;line-height:1.25;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.79518443"
+         x="-108.77614"
+         y="497.88498"
+         id="text934"><tspan
+           sodipodi:role="line"
+           id="tspan932"
+           x="-108.77614"
+           y="497.88498"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.80737877px;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;stroke-width:0.79518443">1</tspan></text>
+    </g>
+    <g
+       id="barre3"
+       inkscape:label="#g977"
+       transform="translate(-3.7639493,-123.50356)">
+      <rect
+         ry="16.524178"
+         rx="16.524178"
+         y="428.02219"
+         x="-168.51193"
+         height="33.048355"
+         width="90.460999"
+         id="rect917"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.60000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text938"
+         y="454.18332"
+         x="-123.34356"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.80737877px;line-height:1.25;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.79518443"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.80737877px;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;stroke-width:0.79518443"
+           y="454.18332"
+           x="-123.34356"
+           id="tspan936"
+           sodipodi:role="line">1</tspan></text>
+    </g>
+    <g
+       id="barre4"
+       inkscape:label="#g972"
+       transform="translate(-3.7639493,-123.50356)">
+      <rect
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.60000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect915"
+         width="120.567"
+         height="33.048355"
+         x="-198.61751"
+         y="383.3494"
+         rx="16.524178"
+         ry="16.524178" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.80737877px;line-height:1.25;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.79518443"
+         x="-138.39613"
+         y="409.51053"
+         id="text942"><tspan
+           sodipodi:role="line"
+           id="tspan940"
+           x="-138.39613"
+           y="409.51053"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.80737877px;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;stroke-width:0.79518443">1</tspan></text>
+    </g>
+    <g
+       id="barre5"
+       inkscape:label="#g967"
+       transform="translate(-3.7639493,-123.50356)">
+      <rect
+         ry="16.524178"
+         rx="16.524178"
+         y="337.21988"
+         x="-227.75194"
+         height="33.048355"
+         width="149.701"
+         id="rect913"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.60000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text946"
+         y="363.38101"
+         x="-152.96356"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.80737877px;line-height:1.25;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.79518443"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.80737877px;font-family:'Linux Libertine';-inkscape-font-specification:'Linux Libertine, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;stroke-width:0.79518443"
+           y="363.38101"
+           x="-152.96356"
+           id="tspan944"
+           sodipodi:role="line">1</tspan></text>
+    </g>
+  </g>
 </svg>

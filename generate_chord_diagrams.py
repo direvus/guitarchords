@@ -141,7 +141,7 @@ def modify_style(elem, key, value):
     elem.attrib['style'] = result
 
 
-def generate_chord(tree, chord):
+def generate_chord(tree, chord, lefthand=False):
     result = deepcopy(tree)
     parent_map = {c: p for p in result.iter() for c in p}
     title = find_element_by_id(result, 'title')
@@ -233,7 +233,8 @@ def generate_chord(tree, chord):
         x = float(rect.attrib['x'])
         y = float(rect.attrib['y'])
 
-        tx = string_xs[max_string - 1] - 16 - x
+        left_string = min_string if lefthand else max_string
+        tx = string_xs[left_string - 1] - 16 - x
 
         relative_fret = frets[0] - fret_shift
         ty = fret_ys[relative_fret - 1] - 16 - y
