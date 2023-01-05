@@ -42,6 +42,32 @@ FLATS = {
         9:  'G♭',
         11: 'A♭',
         }
+FRETS = (
+        'I',
+        'II',
+        'III',
+        'IV',
+        'V',
+        'VI',
+        'VII',
+        'VIII',
+        'IX',
+        'X',
+        'XI',
+        'XII',
+        'XIII',
+        'XIV',
+        'XV',
+        'XVI',
+        'XVII',
+        'XVIII',
+        'XIX',
+        'XX',
+        'XXI',
+        'XXII',
+        'XXIII',
+        'XXIV',
+        )
 
 
 def find_element_by_id(root, elem_id):
@@ -105,6 +131,16 @@ def get_scale(name):
     return [root, mode]
 
 
+def modify_style(elem, key, value):
+    """Modify one key inside the style attribute of an SVG element."""
+    text = str(elem.attrib['style']).strip()
+    parts = [x.split(':', maxsplit=1) for x in text.split(';')]
+    style = {x: y for x, y in parts}
+    style[key] = value
+    result = ';'.join([f'{k}:{v}' for k, v in style.items()])
+    elem.attrib['style'] = result
+
+
 def generate_chord(tree, chord):
     result = deepcopy(tree)
     parent_map = {c: p for p in result.iter() for c in p}
@@ -117,6 +153,9 @@ def generate_chord(tree, chord):
     if root == 'F' or root in FLATS.values():
         flats = True
 
+    fretted = []
+    min_fret = None
+    max_fret = 0
     for i, value in enumerate(chord.get('strings', [])):
         num = i + 1
         if isinstance(value, (str, int)):
@@ -135,6 +174,28 @@ def generate_chord(tree, chord):
 
         finger, fret = value[:2]
         finger = str(finger).upper()
+        fret = int(fret)
+        fretted.append((num, finger, fret))
+        if min_fret is None or fret < min_fret:
+            min_fret = fret
+        if fret > max_fret:
+            max_fret = fret
+
+    if max_fret - min_fret > 3:
+        raise ValueError("Cannot draw a span greater than 4 frets, sorry.")
+
+    fret_ys = []
+    fret_shift = 0
+    if max_fret > 4:
+        fret_shift = min_fret - 1
+    for fret in range(1, 5):
+        fretlabel = find_element_by_id(result, f'fret{fret}')
+        fret_ys.append(float(fretlabel.attrib['y']))
+        fretlabel[0].text = FRETS[fret + fret_shift - 1]
+        if fret == 1 and fret_shift > 0:
+            modify_style(fretlabel[0], 'fill', '#101010')
+
+    for string, finger, fret in fretted:
         if finger == 'T':
             mark = find_element_by_id(result, 'thumb')
         else:
@@ -146,17 +207,17 @@ def generate_chord(tree, chord):
         cx = float(circle.attrib['cx'])
         cy = float(circle.attrib['cy'])
 
-        s = find_element_by_id(result, f'string{num}')
+        s = find_element_by_id(result, f'string{string}')
         x = float(s.attrib['x']) + float(s.attrib['width']) / 2
 
-        fretlabel = find_element_by_id(result, f'fret{fret}')
-        y = float(fretlabel.attrib['y'])
+        relative_fret = fret - fret_shift
+        y = fret_ys[relative_fret - 1]
         mark.attrib['transform'] = f'translate({x - cx}, {y - cy})'
 
-        string_note = STRING_NOTES[i]
+        string_note = STRING_NOTES[string - 1]
         note_index = NOTES.index(string_note) + fret
         note = get_note_name(note_index, flats)
-        notelabel = find_element_by_id(result, f'note{num}')
+        notelabel = find_element_by_id(result, f'note{string}')
         notelabel[0].text = note
 
     return result
