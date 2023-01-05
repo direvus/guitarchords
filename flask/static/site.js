@@ -98,17 +98,18 @@ function update_finger_input(string, fret) {
     el.prop("disabled", disable);
     if (disable) {
         el.addClass("disabled");
-    } else {
-        el.removeClass("disabled");
-        var val = el[0].value;
-        var valid = (val != "");
-        if (valid) {
-            el.removeClass("error");
-        } else {
-            el.addClass("error");
-        }
-        update_submit_button(valid);
+        return true;
     }
+    el.removeClass("disabled");
+    var val = el[0].value;
+    var valid = (val != "");
+
+    if (valid) {
+        el.removeClass("error");
+    } else {
+        el.addClass("error");
+    }
+    return valid;
 }
 
 function update_string(root, mode, string) {
@@ -128,7 +129,7 @@ function update_string(root, mode, string) {
     var name = get_note_name(index, flats);
     show_played_note(string, name);
     show_scale_degree(root_index, mode, string, index);
-    update_finger_input(string, fret);
+    return update_finger_input(string, fret);
 }
 
 function update_submit_button(valid) {
@@ -172,12 +173,32 @@ function update_one_string(string) {
 function update_all_strings() {
     var name = $("input[name='name']").val().trim();
     var scale = get_scale();
+    var valid = true;
     if (name != "" && scale[0] === null) {
         $("#scale-warning").removeClass("hidden");
     }
+    var min_fret = 0;
+    var max_fret = 0;
     for (var i = 1; i <= 6; i++) {
-        update_string(scale[0], scale[1], i);
+        var fret = parseInt($("select[name='s" + i.toString() + "'] option:checked").val());
+        string_valid = update_string(scale[0], scale[1], i);
+        if (!string_valid) {
+            valid = false;
+        }
+        if (min_fret < 1 || fret < min_fret) {
+            min_fret = fret;
+        }
+        if (fret > max_fret) {
+            max_fret = fret;
+        }
     }
+    if (max_fret - min_fret > 3) {
+        $("#span-error").removeClass("hidden");
+        valid = false;
+    } else {
+        $("#span-error").addClass("hidden");
+    }
+    update_submit_button(valid);
 }
 
 $(document).ready(update_all_strings);

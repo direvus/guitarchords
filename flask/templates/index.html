@@ -4,18 +4,38 @@ name={{ name }}{% if left %}&lh=1{% endif %}&s1={{ strings.0.1 }}&f1={{ strings.
 {% endmacro %}
 
 {% macro fret_input(string, fret) %}
-<select class="ui dropdown" name="s{{ string }}" onchange="update_one_string({{ string }});">
+<select class="ui dropdown" name="s{{ string }}" onchange="update_all_strings();">
     <option value="O" {% if fret == "O" %}selected{% endif %}>Open</option>
     <option value="X" {% if fret == "X" %}selected{% endif %}>Muted</option>
     <option value="1" {% if fret == 1 %}selected{% endif %}>1st fret</option>
     <option value="2" {% if fret == 2 %}selected{% endif %}>2nd fret</option>
     <option value="3" {% if fret == 3 %}selected{% endif %}>3rd fret</option>
     <option value="4" {% if fret == 4 %}selected{% endif %}>4th fret</option>
+    <option value="5" {% if fret == 5 %}selected{% endif %}>5th fret</option>
+    <option value="6" {% if fret == 6 %}selected{% endif %}>6th fret</option>
+    <option value="7" {% if fret == 7 %}selected{% endif %}>7th fret</option>
+    <option value="8" {% if fret == 8 %}selected{% endif %}>8th fret</option>
+    <option value="9" {% if fret == 9 %}selected{% endif %}>9th fret</option>
+    <option value="10" {% if fret == 10 %}selected{% endif %}>10th fret</option>
+    <option value="11" {% if fret == 11 %}selected{% endif %}>11th fret</option>
+    <option value="12" {% if fret == 12 %}selected{% endif %}>12th fret</option>
+    <option value="13" {% if fret == 13 %}selected{% endif %}>13th fret</option>
+    <option value="14" {% if fret == 14 %}selected{% endif %}>14th fret</option>
+    <option value="15" {% if fret == 15 %}selected{% endif %}>15th fret</option>
+    <option value="16" {% if fret == 16 %}selected{% endif %}>16th fret</option>
+    <option value="17" {% if fret == 17 %}selected{% endif %}>17th fret</option>
+    <option value="18" {% if fret == 18 %}selected{% endif %}>18th fret</option>
+    <option value="19" {% if fret == 19 %}selected{% endif %}>19th fret</option>
+    <option value="20" {% if fret == 20 %}selected{% endif %}>20th fret</option>
+    <option value="21" {% if fret == 21 %}selected{% endif %}>21st fret</option>
+    <option value="22" {% if fret == 22 %}selected{% endif %}>22nd fret</option>
+    <option value="23" {% if fret == 23 %}selected{% endif %}>23rd fret</option>
+    <option value="24" {% if fret == 24 %}selected{% endif %}>24th fret</option>
 </select>
 {% endmacro %}
 
 {% macro finger_input(string, finger) %}
-<select class="ui dropdown" name="f{{ string }}" onchange="update_one_string({{ string }});">
+<select class="ui dropdown" name="f{{ string }}" onchange="update_all_strings();">
     <option value="" {% if not finger %}selected{% endif %}>None</option>
     <option value="1" {% if finger == 1 %}selected{% endif %}>1st finger</option>
     <option value="2" {% if finger == 2 %}selected{% endif %}>2nd finger</option>
@@ -158,6 +178,10 @@ name={{ name }}{% if left %}&lh=1{% endif %}&s1={{ strings.0.1 }}&f1={{ strings.
                             </tbody>
                         </table>
 
+                        <div id="span-error" class="ui hidden negative message">
+                            <div class="header">Fret span too large</div>
+                            <p>Sorry, the distance between frets is too large to represent in the diagram. I can only produce diagrams with a span of up to four frets.</p>
+                        </div>
                         <div>
                             <button class="ui primary button" type="submit"><i class="file image icon"></i> Generate</button>
                             <a class="ui basic button" href="?"><i class="refresh icon"></i> Reset all strings</a>
