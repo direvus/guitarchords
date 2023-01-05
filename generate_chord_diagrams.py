@@ -153,10 +153,13 @@ def generate_chord(tree, chord):
     if root == 'F' or root in FLATS.values():
         flats = True
 
+    strings = chord.get('strings', [])
     fretted = []
+    finger_frets = {}
+    finger_strings = {}
     min_fret = None
     max_fret = 0
-    for i, value in enumerate(chord.get('strings', [])):
+    for i, value in enumerate(strings):
         num = i + 1
         if isinstance(value, (str, int)):
             value = str(value).upper()
@@ -180,6 +183,14 @@ def generate_chord(tree, chord):
             min_fret = fret
         if fret > max_fret:
             max_fret = fret
+        if finger in finger_frets:
+            finger_frets[finger].append(fret)
+        else:
+            finger_frets[finger] = [fret]
+        if finger in finger_strings:
+            finger_strings[finger].append(num)
+        else:
+            finger_strings[finger] = [num]
 
     if max_fret - min_fret > 3:
         raise ValueError("Cannot draw a span greater than 4 frets, sorry.")
@@ -195,7 +206,43 @@ def generate_chord(tree, chord):
         if fret == 1 and fret_shift > 0:
             modify_style(fretlabel[0], 'fill', '#101010')
 
+    string_xs = []
+    for i in range(len(strings)):
+        s = find_element_by_id(result, f'string{i+1}')
+        x = float(s.attrib['x']) + float(s.attrib['width']) / 2
+        string_xs.append(x)
+
+    barres = set()
+    for finger, frets in finger_frets.items():
+        if len(frets) < 2 or len(set(frets)) != 1:
+            continue
+        strings = finger_strings.get(finger, [])
+        min_string = min(strings)
+        max_string = max(strings)
+        length = max_string - min_string + 1
+        mark = find_element_by_id(result, f'barre{length}')
+        if not mark:
+            # fall back to just using regular finger markers
+            continue
+        barres.add(finger)
+        parent = parent_map[mark]
+        mark = deepcopy(mark)
+        parent.append(mark)
+        mark[1][0].text = finger
+        rect = mark[0]
+        x = float(rect.attrib['x'])
+        y = float(rect.attrib['y'])
+
+        tx = string_xs[max_string - 1] - 16 - x
+
+        relative_fret = frets[0] - fret_shift
+        ty = fret_ys[relative_fret - 1] - 16 - y
+
+        mark.attrib['transform'] = f'translate({tx},{ty})'
+
     for string, finger, fret in fretted:
+        if finger in barres:
+            continue
         if finger == 'T':
             mark = find_element_by_id(result, 'thumb')
         else:
@@ -212,7 +259,7 @@ def generate_chord(tree, chord):
 
         relative_fret = fret - fret_shift
         y = fret_ys[relative_fret - 1]
-        mark.attrib['transform'] = f'translate({x - cx}, {y - cy})'
+        mark.attrib['transform'] = f'translate({x - cx},{y - cy})'
 
         string_note = STRING_NOTES[string - 1]
         note_index = NOTES.index(string_note) + fret
