@@ -141,6 +141,15 @@ def modify_style(elem, key, value):
     elem.attrib['style'] = result
 
 
+def set_played_note(tree, string, fret, flats=False):
+    string_note = STRING_NOTES[string - 1]
+    note_index = NOTES.index(string_note) + fret
+    note = get_note_name(note_index, flats)
+    notelabel = find_element_by_id(tree, f'note{string}')
+    notelabel[0].text = note
+    return note
+
+
 def generate_chord(tree, chord, lefthand=False):
     result = deepcopy(tree)
     parent_map = {c: p for p in result.iter() for c in p}
@@ -242,6 +251,7 @@ def generate_chord(tree, chord, lefthand=False):
         mark.attrib['transform'] = f'translate({tx},{ty})'
 
     for string, finger, fret in fretted:
+        set_played_note(result, string, fret, flats)
         if finger in barres:
             continue
         if finger == 'T':
@@ -261,12 +271,6 @@ def generate_chord(tree, chord, lefthand=False):
         relative_fret = fret - fret_shift
         y = fret_ys[relative_fret - 1]
         mark.attrib['transform'] = f'translate({x - cx},{y - cy})'
-
-        string_note = STRING_NOTES[string - 1]
-        note_index = NOTES.index(string_note) + fret
-        note = get_note_name(note_index, flats)
-        notelabel = find_element_by_id(result, f'note{string}')
-        notelabel[0].text = note
 
     return result
 
