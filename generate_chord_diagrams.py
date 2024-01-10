@@ -42,7 +42,7 @@ FLATS = {
         9:  'G♭',
         11: 'A♭',
         }
-FRETS = (
+ROMAN_FRETS = (
         'I',
         'II',
         'III',
@@ -150,7 +150,7 @@ def set_played_note(tree, string, fret, flats=False):
     return note
 
 
-def generate_chord(tree, chord, lefthand=False):
+def generate_chord(tree, chord, lefthand=False, romanfrets=False):
     result = deepcopy(tree)
     parent_map = {c: p for p in result.iter() for c in p}
     title = find_element_by_id(result, 'title')
@@ -201,7 +201,7 @@ def generate_chord(tree, chord, lefthand=False):
         else:
             finger_strings[finger] = [num]
 
-    if max_fret - min_fret > 3:
+    if not min_fret is None and max_fret - min_fret > 3:
         raise ValueError("Cannot draw a span greater than 4 frets, sorry.")
 
     fret_ys = []
@@ -211,7 +211,10 @@ def generate_chord(tree, chord, lefthand=False):
     for fret in range(1, 5):
         fretlabel = find_element_by_id(result, f'fret{fret}')
         fret_ys.append(float(fretlabel.attrib['y']))
-        fretlabel[0].text = FRETS[fret + fret_shift - 1]
+        if romanfrets:
+            fretlabel[0].text = ROMAN_FRETS[fret + fret_shift - 1]
+        else:
+            fretlabel[0].text = str(fret + fret_shift)
         if fret == 1 and fret_shift > 0:
             modify_style(fretlabel[0], 'fill', '#101010')
 

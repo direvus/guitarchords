@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% macro chord_query_params(name, strings) %}
-name={{ name }}{% if left %}&lh=1{% endif %}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f2={{ strings.1.0 }}&s3={{ strings.2.1 }}&f3={{ strings.2.0 }}&s4={{ strings.3.1 }}&f4={{ strings.3.0 }}&s5={{ strings.4.1 }}&f5={{ strings.4.0 }}&s6={{ strings.5.1 }}&f6={{ strings.5.0 }}
+name={{ name }}{% if left %}&lh=1{% endif %}{% if romanfrets %}&rf=1{% endif %}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f2={{ strings.1.0 }}&s3={{ strings.2.1 }}&f3={{ strings.2.0 }}&s4={{ strings.3.1 }}&f4={{ strings.3.0 }}&s5={{ strings.4.1 }}&f5={{ strings.4.0 }}&s6={{ strings.5.1 }}&f6={{ strings.5.0 }}
 {% endmacro %}
 
 {% macro fret_input(string, fret) %}
@@ -111,6 +111,12 @@ name={{ name }}{% if left %}&lh=1{% endif %}&s1={{ strings.0.1 }}&f1={{ strings.
                             <div class="ui toggle checkbox">
                                 <input type="checkbox" name="lh" value="1" {% if left %}checked{% endif %}>
                                 <label>Left handed?</label>
+                            </div>
+                        </div>
+                        <div class="inline field">
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="rf" value="1" {% if romanfrets %}checked{% endif %}>
+                                <label>Roman numeral fret markers?</label>
                             </div>
                         </div>
 

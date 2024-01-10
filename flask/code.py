@@ -73,8 +73,16 @@ def validate_chord(request):
             }
 
 
+def validate_bool(value):
+    return value.strip() == '1'
+
+
 def validate_left_handed(request):
-    return (request.args.get('lh', '').strip() == '1')
+    return validate_bool(request.args.get('lh', ''))
+
+
+def validate_roman_frets(request):
+    return validate_bool(request.args.get('rf', ''))
 
 
 def get_inkscape_version(command='inkscape'):
@@ -87,12 +95,12 @@ def get_inkscape_version(command='inkscape'):
     return (int(match.group(1)), int(match.group(2)), int(match.group(3)))
 
 
-def generate_diagram(chord, left=False, width=209):
+def generate_diagram(chord, left=False, romanfrets=False, width=209):
     template_file = 'chord_base.svg'
     if left:
         template_file = 'chord_base_lh.svg'
     tree = ElementTree.parse(template_file)
-    diag = generate_chord(tree, chord, left)
+    diag = generate_chord(tree, chord, left, romanfrets)
     svgfile = NamedTemporaryFile(suffix='.svg', delete=False)
     diag.write(svgfile)
     svgfile.close()
@@ -129,10 +137,12 @@ def index():
     presets = [(x, groups[x]) for x in initials]
     chord = validate_chord(request)
     left = validate_left_handed(request)
+    romanfrets = validate_roman_frets(request)
     return render_template(
             'index.html',
             name=chord['name'],
             left=left,
+            romanfrets=romanfrets,
             strings=chord['strings'],
             presets=presets,
             )
@@ -141,9 +151,10 @@ def index():
 @app.route('/chord')
 def chord():
     left = validate_left_handed(request)
+    romanfrets = validate_roman_frets(request)
     chord = validate_chord(request)
     chord = strings_to_short_form(chord)
-    filename = generate_diagram(chord, left)
+    filename = generate_diagram(chord, left, romanfrets)
     result = send_file(filename, 'image/png')
     os.remove(filename)
     return result
@@ -152,9 +163,10 @@ def chord():
 @app.route('/download')
 def download():
     left = validate_left_handed(request)
+    romanfrets = validate_roman_frets(request)
     chord = validate_chord(request)
     chord = strings_to_short_form(chord)
-    filename = generate_diagram(chord, left)
+    filename = generate_diagram(chord, left, romanfrets)
     basename = re.sub(r'[\W]+', '', chord['name'])
     if left:
         basename += '_lh'
