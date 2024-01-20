@@ -22,22 +22,32 @@ const FLATS = {
 const TUNING = ["E", "B", "G", "D", "A", "E"];
 const SCALES = {
         "major": {
-            0: "I",
-            2: "ii",
-            4: "iii",
-            5: "IV",
-            7: "V",
-            9: "vi",
-            11: "vii"
+            0: "1",
+            1: "♭2",
+            2: "2",
+            3: "♭3",
+            4: "3",
+            5: "4",
+            6: "♭5",
+            7: "5",
+            8: "♭6",
+            9: "6",
+            10: "♭7",
+            11: "7"
             },
         "minor": {
-            0: "i",
-            2: "ii",
-            3: "III",
-            5: "iv",
-            7: "v",
-            8: "VI",
-            10: "VII"
+            0: "1",
+            1: "♭2",
+            2: "2",
+            3: "3",
+            4: "♭4",
+            5: "4",
+            6: "♭5",
+            7: "5",
+            8: "6",
+            9: "♭7",
+            10: "7",
+            11: "♯7"
             }
         };
 
@@ -54,6 +64,9 @@ function get_string_note(string, fret) {
 }
 
 function get_note_name(index, flats) {
+    if (index === null) {
+        return null;
+    }
     index = index % 12;
     if (flats && index in FLATS) {
         return FLATS[index];
