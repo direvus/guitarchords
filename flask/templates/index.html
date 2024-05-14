@@ -41,7 +41,7 @@ name={{ name }}{% if left %}&lh=1{% endif %}{% if romanfrets %}&rf=1{% endif %}&
     <option value="2" {% if finger == 2 %}selected{% endif %}>2nd finger</option>
     <option value="3" {% if finger == 3 %}selected{% endif %}>3rd finger</option>
     <option value="4" {% if finger == 4 %}selected{% endif %}>4th finger</option>
-    <option value="5" {% if finger == "T" %}selected{% endif %}>Thumb</option>
+    <option value="T" {% if finger == "T" %}selected{% endif %}>Thumb</option>
 </select>
 {% endmacro %}
 

@@ -257,7 +257,7 @@ def generate_chord(tree, chord, lefthand=False, romanfrets=False):
         set_played_note(result, string, fret, flats)
         if finger in barres:
             continue
-        if finger == 'T':
+        if finger in {'T', 5}:
             mark = find_element_by_id(result, 'thumb')
         else:
             mark = find_element_by_id(result, f'finger{finger}')
