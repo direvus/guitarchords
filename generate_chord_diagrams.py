@@ -84,6 +84,13 @@ def remove_element_by_id(root, elem_id, parent_map):
     remove_element(elem, parent_map)
 
 
+def set_style(element, name, value):
+    style = element.get('style', '')
+    attrs = dict([x.split(':') for x in style.split(';')])
+    attrs[name] = value
+    element.set('style', ';'.join([f'{k}:{v}' for k, v in attrs.items()]))
+
+
 def get_note_name(index, flats=False):
     index = index % 12
     if flats and index in FLATS:
@@ -141,7 +148,7 @@ def modify_style(elem, key, value):
     elem.attrib['style'] = result
 
 
-def set_played_note(tree, string, fret, flats=False):
+def set_played_note(tree, string, fret, flats=False) -> str:
     string_note = STRING_NOTES[string - 1]
     note_index = NOTES.index(string_note) + fret
     note = get_note_name(note_index, flats)
@@ -168,7 +175,8 @@ def generate_chord(tree, chord, lefthand=False, romanfrets=False):
     finger_strings = {}
     min_fret = None
     max_fret = 0
-    for i, value in enumerate(strings):
+    root_string = None
+    for i, value in reversed(list(enumerate(strings))):
         num = i + 1
         if isinstance(value, (str, int)):
             value = str(value).upper()
@@ -178,7 +186,10 @@ def generate_chord(tree, chord, lefthand=False, romanfrets=False):
         else:
             remove_element_by_id(result, f'mute{num}', parent_map)
 
-        if value not in ('O', '0'):
+        if value in ('O', '0'):
+            if root_string is None and STRING_NOTES[i] == root:
+                root_string = num
+        else:
             remove_element_by_id(result, f'open{num}', parent_map)
 
         if not isinstance(value, (list, tuple)):
@@ -188,6 +199,11 @@ def generate_chord(tree, chord, lefthand=False, romanfrets=False):
         finger = str(finger).upper()
         fret = int(fret)
         fretted.append((num, finger, fret))
+
+        note = set_played_note(result, num, fret, flats)
+        if root_string is None and note == root:
+            root_string = num
+
         if min_fret is None or fret < min_fret:
             min_fret = fret
         if fret > max_fret:
@@ -201,7 +217,7 @@ def generate_chord(tree, chord, lefthand=False, romanfrets=False):
         else:
             finger_strings[finger] = [num]
 
-    if not min_fret is None and max_fret - min_fret > 3:
+    if min_fret is not None and max_fret - min_fret > 3:
         raise ValueError("Cannot draw a span greater than 4 frets, sorry.")
 
     fret_ys = []
@@ -254,7 +270,6 @@ def generate_chord(tree, chord, lefthand=False, romanfrets=False):
         mark.attrib['transform'] = f'translate({tx},{ty})'
 
     for string, finger, fret in fretted:
-        set_played_note(result, string, fret, flats)
         if finger in barres:
             continue
         if finger in {'T', 5}:
@@ -274,6 +289,9 @@ def generate_chord(tree, chord, lefthand=False, romanfrets=False):
         relative_fret = fret - fret_shift
         y = fret_ys[relative_fret - 1]
         mark.attrib['transform'] = f'translate({x - cx},{y - cy})'
+
+        if root_string == string:
+            set_style(circle, 'fill', '#800000')
 
     return result
 
