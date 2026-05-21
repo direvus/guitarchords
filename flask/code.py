@@ -8,7 +8,9 @@ from urllib.parse import urlencode
 from xml.etree import ElementTree
 
 import yaml
-from flask import Flask, request, render_template, send_file
+from flask import (
+        Flask, request, render_template, send_file,
+        __version__ as flask_version)
 from generate_chord_diagrams import generate_chord
 
 
@@ -96,6 +98,11 @@ def get_inkscape_version(command='inkscape'):
     return (int(match.group(1)), int(match.group(2)), int(match.group(3)))
 
 
+def get_flask_version(command='inkscape'):
+    """Return the version of Flask, as a tuple of 3 integers."""
+    return tuple(int(x) for x in flask_version.split('.'))
+
+
 def generate_diagram(chord, left=False, romanfrets=False, width=209):
     template_file = 'chord_base.svg'
     if left:
@@ -120,6 +127,23 @@ def generate_diagram(chord, left=False, romanfrets=False, width=209):
     return pngfile.name
 
 
+def get_query_params(name, strings, left=False, romanfrets=False):
+    params = {
+            'name': name,
+            }
+    if left:
+        params['lh'] = 1
+    if romanfrets:
+        params['rf'] = 1
+    n = 1
+    for s in strings:
+        finger, fret = s
+        params[f's{n}'] = fret
+        params[f'f{n}'] = finger
+        n += 1
+    return urlencode(params)
+
+
 @app.route('/')
 def index():
     with open('chords.yaml', 'r', encoding='utf-8') as fp:
@@ -139,19 +163,6 @@ def index():
     chord = validate_chord(request)
     left = validate_left_handed(request)
     romanfrets = validate_roman_frets(request)
-    params = {
-            'name': chord['name'],
-            }
-    if left:
-        params['lh'] = 1
-    if romanfrets:
-        params['rf'] = 1
-    n = 1
-    for s in chord['strings']:
-        finger, fret = s
-        params[f's{n}'] = fret
-        params[f'f{n}'] = finger
-        n += 1
 
     return render_template(
             'index.html',
@@ -160,7 +171,7 @@ def index():
             romanfrets=romanfrets,
             strings=chord['strings'],
             presets=presets,
-            chord_query_params=urlencode(params),
+            chord_query_params=get_query_params,
             )
 
 
@@ -183,14 +194,19 @@ def download():
     chord = validate_chord(request)
     chord = strings_to_short_form(chord)
     filename = generate_diagram(chord, left, romanfrets)
-    basename = re.sub(r'[\W]+', '', chord['name'])
+    basename = re.sub(r'[^\w#♯♭()+-]+', '', chord['name'])
     if left:
         basename += '_lh'
     dlname = basename + '.png'
-    result = send_file(
-            filename,
-            'image/png',
-            as_attachment=True,
-            attachment_filename=dlname)
+
+    kwargs = {'as_attachment': True}
+    # Flask helpfully changed the API for send_file, so now we have to maintain
+    # a code path for both APIs. Thanks guys.
+    # https://github.com/pallets/flask/issues/4753
+    if get_flask_version()[0] > 1:
+        kwargs['download_name'] = dlname
+    else:
+        kwargs['attachment_filename'] = dlname
+    result = send_file(filename, 'image/png', **kwargs)
     os.remove(filename)
     return result

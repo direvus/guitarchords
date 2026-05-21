@@ -83,7 +83,7 @@
                     <h3>{{ initial }}</h3>
                     {% for chord in chords %}
                     <div>
-                        <a href="?{{ chord_query_params }}">{{ chord.name }}</a>
+                        <a href="?{{ chord_query_params(chord.name, chord.strings, left, romanfrets) }}">{{ chord.name }}</a>
                     </div>
                     {% endfor %}
                 </div>
@@ -191,9 +191,9 @@
                     </form>
                 </div>
                 <div class="six wide column">
-                    <img src="chord?{{ chord_query_params }}" alt="{{ name }}">
+                    <img src="chord?{{ chord_query_params(name, strings, left, romanfrets) }}" alt="{{ name }}">
                     <p>
-                        <a class="ui button" href="download?{{ chord_query_params }}"><i class="download icon"></i> Download this diagram</a>
+                        <a class="ui button" href="download?{{ chord_query_params(name, strings, left, romanfrets) }}"><i class="download icon"></i> Download this diagram</a>
                     </p>
                 </div>
             </div>
