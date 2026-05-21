@@ -249,7 +249,7 @@ def generate_chord(tree, chord, lefthand=False, romanfrets=False):
         max_string = max(strings)
         length = max_string - min_string + 1
         mark = find_element_by_id(result, f'barre{length}')
-        if not mark:
+        if mark is None:
             # fall back to just using regular finger markers
             continue
         barres.add(finger)

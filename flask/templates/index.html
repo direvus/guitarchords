@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-{% macro chord_query_params(name, strings) %}
-name={{ name }}{% if left %}&lh=1{% endif %}{% if romanfrets %}&rf=1{% endif %}&s1={{ strings.0.1 }}&f1={{ strings.0.0 }}&s2={{ strings.1.1 }}&f2={{ strings.1.0 }}&s3={{ strings.2.1 }}&f3={{ strings.2.0 }}&s4={{ strings.3.1 }}&f4={{ strings.3.0 }}&s5={{ strings.4.1 }}&f5={{ strings.4.0 }}&s6={{ strings.5.1 }}&f6={{ strings.5.0 }}
-{% endmacro %}
-
 {% macro fret_input(string, fret) %}
 <select class="ui dropdown" name="s{{ string }}" onchange="update_all_strings();">
     <option value="O" {% if fret == "O" %}selected{% endif %}>Open</option>
@@ -87,7 +83,7 @@ name={{ name }}{% if left %}&lh=1{% endif %}{% if romanfrets %}&rf=1{% endif %}&
                     <h3>{{ initial }}</h3>
                     {% for chord in chords %}
                     <div>
-                        <a href="?{{ chord_query_params(chord.name, chord.strings) }}">{{ chord.name }}</a>
+                        <a href="?{{ chord_query_params }}">{{ chord.name }}</a>
                     </div>
                     {% endfor %}
                 </div>
@@ -195,9 +191,9 @@ name={{ name }}{% if left %}&lh=1{% endif %}{% if romanfrets %}&rf=1{% endif %}&
                     </form>
                 </div>
                 <div class="six wide column">
-                    <img src="chord?{{ chord_query_params(name, strings) }}" alt="{{ name }}">
+                    <img src="chord?{{ chord_query_params }}" alt="{{ name }}">
                     <p>
-                        <a class="ui button" href="download?{{ chord_query_params(name, strings) }}"><i class="download icon"></i> Download this diagram</a>
+                        <a class="ui button" href="download?{{ chord_query_params }}"><i class="download icon"></i> Download this diagram</a>
                     </p>
                 </div>
             </div>
