@@ -4,6 +4,7 @@ import re
 import subprocess
 from copy import deepcopy
 from tempfile import NamedTemporaryFile
+from urllib.parse import urlencode
 from xml.etree import ElementTree
 
 import yaml
@@ -138,6 +139,20 @@ def index():
     chord = validate_chord(request)
     left = validate_left_handed(request)
     romanfrets = validate_roman_frets(request)
+    params = {
+            'name': chord['name'],
+            }
+    if left:
+        params['lh'] = 1
+    if romanfrets:
+        params['rf'] = 1
+    n = 1
+    for s in chord['strings']:
+        finger, fret = s
+        params[f's{n}'] = fret
+        params[f'f{n}'] = finger
+        n += 1
+
     return render_template(
             'index.html',
             name=chord['name'],
@@ -145,6 +160,7 @@ def index():
             romanfrets=romanfrets,
             strings=chord['strings'],
             presets=presets,
+            chord_query_params=urlencode(params),
             )
 
 
